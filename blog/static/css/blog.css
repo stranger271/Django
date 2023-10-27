@@ -44,3 +44,18 @@ h1, h2, h3, h4 {
 .post h1 a, .post h1 a:visited {
   color: #000000;
 }
+.comment{
+  border-radius: 5px;
+  border: 1px solid #828282;
+  padding: 5px;
+  margin: 15px 0 5px 0;
+}
+.comment_answer{
+ 
+  border-left: 1px solid #828282;
+  padding: 5px;
+  margin: 5px 0 5px 0px;
+}
+.comment_answer .info{
+  background-color: #8282825a; 
+}

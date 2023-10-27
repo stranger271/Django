@@ -16,9 +16,13 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+    
+    def get_comments(self):
+        return self.comments.filter(parent__isnull=True)
 
 class Comment(models.Model):
     post=models.ForeignKey(Post, related_name='comments', on_delete=models.CASCADE)
+    parent=models.ForeignKey('self' ,null=True,blank=True, on_delete=models.SET_NULL)
     user_name = models.CharField(max_length=200)     
     text = models.TextField()
     created_date = models.DateTimeField(blank=True, null=True)

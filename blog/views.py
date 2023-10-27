@@ -13,12 +13,14 @@ def post_list(request):
 
 def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
-    comments = post.comments.all().order_by('-created_date')
+    
     done = False
     if request.method == 'POST':        
         form = CommentForm(request.POST)
         if form.is_valid():             
-            com = form.save(commit=False)            
+            com = form.save(commit=False)  
+            if request.POST.get('parent',None):
+               com.parent_id = int(request.POST.get('parent'))          
             com.post = post 
             com.created_date = timezone.now()       
             com.save()
@@ -27,7 +29,7 @@ def post_detail(request, pk):
     else:
         form = CommentForm()
 
-    return render(request, 'blog/post_detail.html',  {'post': post,'comments': comments,'form': form , 'done':done })
+    return render(request, 'blog/post_detail.html',  {'post': post,'form': form , 'done':done })
 
 
 

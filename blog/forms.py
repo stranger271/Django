@@ -13,4 +13,10 @@ class CommentForm(forms.ModelForm):
 
     class Meta:
         model = Comment
+          
         fields = ('user_name', 'text')
+         
+        labels = {
+        'user_name': 'Имя',
+        'text': 'Текст'
+    }

@@ -13,4 +13,36 @@
         <h1>{{ post.title }}</h1>
         <p>{{ post.text|linebreaksbr }}</p>
     </div>
+
+   
+    <h2>
+         Комментарии ({{comments.count}}) 
+    </h2>
+   
+
+    {% for comment in comments %}
+    <div class="comment">
+        <p class="info">
+            Пользователь: {{ comment.user_name }}
+            <br/>
+            Дата: {{ comment.created_date }}
+        </p>
+        {{ comment.text|linebreaks }}
+    </div>
+    {% empty %}
+        <p>Пока нету комментариев...</p>
+    {% endfor %}
+
+
+    {% if done %}
+        <h2>Комментарий сохранен</h2>
+    {% else %}
+        <h2>Оставить комментарий</h2>
+        <form action="." method="post">
+            {{ form.as_div }}
+            {% csrf_token %}
+            <p><input type="submit" value="Сохранить"></p>
+        </form>
+    {% endif %}
+
 {% endblock %}

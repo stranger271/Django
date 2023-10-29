@@ -1,0 +1,20 @@
+
+
+{% for comment in comments %}
+<div class="{{ cl }}" style="margin-left: {{offset}}px;">
+    <p class="info">
+        Пользователь: {{ comment.user_name }}
+        <br/>
+        Дата: {{ comment.created_date }}
+    </p>
+    {{ comment.text|linebreaks }}
+    <a href="#formComment" onclick="addReview('{{ comment.user_name }}', '{{ comment.id }}')">Ответить</a>
+</div>
+ 
+    {% include "blog/comments.html" with comments=comment.comment_set.all cl='comment_answer' offset=offset|add:"+50" %}
+ 
+   
+{% endfor %}
+
+
+ 
